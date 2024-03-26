@@ -7,15 +7,32 @@
 #define BLINK_DELAY 500
 #define BLINK_LONG_DELAY 1500
 
-#define WHITE 255, 255, 255
-#define RED 255, 0, 0
-#define YELLOW 255, 255, 0
-#define GREEN 0, 255, 0
-#define CYAN 0, 255, 255
-#define BLUE 0, 0, 255
-#define MAGENTA 255, 0, 255
+#define WHITE 0xffffff
+#define RED 0xff0000
+#define YELLOW 0xffff00
+#define GREEN 0x00ff00
+#define CYAN 0x00ffff
+#define BLUE 0x0000ff
+#define MAGENTA 0xff00ff
 
 GigaDisplayRGB rgb;
+
+void rgbOn(unsigned int color)
+{
+  unsigned int r = (color >> 16) & 0xff;
+  unsigned int g = (color >> 8) & 0xff;
+  unsigned int b = color & 0xff;
+
+  rgb.on(r, g, b);
+}
+
+void blink(int color, int time = BLINK_DELAY)
+{
+  rgbOn(color);
+  delay(time);
+  rgb.off();
+  delay(time);
+}
 
 void blink(int r, int g, int b, int time = BLINK_DELAY)
 {
@@ -48,8 +65,9 @@ void rainbowDemo()
 void errorDemo()
 {
   errorBlink(0);
+  errorBlink(0);
+  errorBlink(1);
   errorBlink(2);
-  errorBlink(4);
 }
 
 #endif
