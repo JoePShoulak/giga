@@ -1,5 +1,8 @@
 #include "Particle.h"
 
+#define GRAVITY 0, 10
+Vector2D gravity(GRAVITY);
+
 Particle::Particle(int x, int y, int diameter, int color) : pos(x, y), diameter(diameter), color(color)
 {
 }
@@ -15,6 +18,8 @@ void Particle::applyForce(Vector2D force)
 
 void Particle::update()
 {
+  this->applyForce(gravity / diameter);
+
   vel += acc;
   pos += vel;
   acc *= 0;
@@ -25,13 +30,6 @@ void Particle::update(void (*postUpdate)(Particle &))
   this->update();
 
   postUpdate(*this);
-}
-
-void Particle::update(void (*preUpdate)(Particle &), void (*postUpdate)(Particle &))
-{
-  preUpdate(*this);
-
-  this->update(postUpdate);
 }
 
 void Particle::print()
