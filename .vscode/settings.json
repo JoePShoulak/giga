@@ -38,6 +38,7 @@
     "regex": "cpp",
     "span": "cpp",
     "vector": "cpp",
-    "xhash": "cpp"
+    "xhash": "cpp",
+    "cmath": "cpp"
   }
 }

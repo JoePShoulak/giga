@@ -8,6 +8,11 @@
 #define BLINK_DELAY 500
 #define BLINK_LONG_DELAY 1500
 
+enum ErrorCodes
+{
+  DISPLAY_ERROR
+};
+
 GigaDisplayRGB rgb;
 
 void blink(int r, int g, int b, int time = BLINK_DELAY)

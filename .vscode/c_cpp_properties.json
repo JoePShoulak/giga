@@ -9,7 +9,7 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "~/OneDrive/Documents/Arduino/libraries/**",
-                "C:\\Users\\joeps\\OneDrive\\Documents\\Arduino\\libraries\\ArduinoGraphics",
+                "C:\\Users\\joeps\\OneDrive\\Documents\\Arduino\\libraries\\**",
                 "C:\\Users\\joeps\\AppData\\Local\\Arduino15\\packages\\arduino\\**"
             ],
             "forcedInclude": [],

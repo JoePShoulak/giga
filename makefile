@@ -1,6 +1,7 @@
 FQBN = arduino:mbed_giga:giga
 FILE = giga.ino
 PORT = COM3
+BAUDRATE = 9600
 
 .PHONY: all install compile upload monitor
 
@@ -17,4 +18,4 @@ upload:
 	arduino-cli upload -p $(PORT) --fqbn $(FQBN) $(FILE)
 
 monitor:
-	arduino-cli monitor -p $(PORT)
+	arduino-cli monitor -p $(PORT) --config baudrate=$(BAUDRATE)
