@@ -1,15 +1,20 @@
 FQBN = arduino:mbed_giga:giga
 FILE = giga.ino
-PORT = COM21
+PORT = COM3
 
-all: compile upload
+.PHONY: all install compile upload monitor
+
+all: compile upload monitor
 
 install:
-	@arduino-cli lib install ArduinoGraphics
-	@arduino-cli lib install Arduino_GigaDisplay
+	arduino-cli lib install ArduinoGraphics
+	arduino-cli lib install Arduino_GigaDisplay
 
 compile:
-	@arduino-cli compile --fqbn $(FQBN) $(FILE)
+	arduino-cli compile --fqbn $(FQBN) $(FILE)
 
 upload:
-	@arduino-cli upload -p $(PORT) --fqbn $(FQBN) $(FILE)
+	arduino-cli upload -p $(PORT) --fqbn $(FQBN) $(FILE)
+
+monitor:
+	arduino-cli monitor -p $(PORT)
