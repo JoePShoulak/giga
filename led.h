@@ -27,7 +27,7 @@ void errorBlink(int errorCode)
 {
   for (int i = 0; i <= errorCode; i++)
   {
-    blink(RED, BLINK_SHORT_DELAY);
+    blink(255, 0, 0, BLINK_SHORT_DELAY);
   }
 
   delay(BLINK_LONG_DELAY);

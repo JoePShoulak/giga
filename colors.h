@@ -1,15 +1,15 @@
 #ifndef __COLORS_H
 #define __COLORS_H
 
-#define BLACK 0, 0, 0
-#define GRAY 128, 128, 128
-#define WHITE 255, 255, 255
+#define BLACK 0x000000
+#define GRAY 0x888888
+#define WHITE 0xffffff
 
-#define RED 255, 0, 0
-#define YELLOW 255, 255, 0
-#define GREEN 0, 255, 0
-#define CYAN 0, 255, 255
-#define BLUE 0, 0, 255
-#define MAGENTA 255, 0, 255
+#define RED 0xff00
+#define YELLOW 0xffff0
+#define GREEN 0x0ff0
+#define CYAN 0x0ffff
+#define BLUE 0x00ff
+#define MAGENTA 0xff0ff
 
 #endif

@@ -39,6 +39,9 @@
     "span": "cpp",
     "vector": "cpp",
     "xhash": "cpp",
-    "cmath": "cpp"
+    "cmath": "cpp",
+    "unordered_map": "cpp",
+    "unordered_set": "cpp",
+    "string_view": "cpp"
   }
 }

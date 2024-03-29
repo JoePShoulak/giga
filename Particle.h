@@ -7,11 +7,14 @@ class Particle
 {
 public:
   Particle(int x, int y, int diameter, int color);
+  Particle();
 
   void applyForce(Vector2D force);
   void update();
   void update(void (*postUpdate)(Particle &));
   void update(void (*preUpdate)(Particle &), void (*postUpdate)(Particle &));
+
+  void print();
 
   Vector2D pos;
   Vector2D vel;
