@@ -10,23 +10,24 @@
 #define FLAKE_COUNT 10
 #define MIN_DIAMETER 10
 #define MAX_DIAMETER 80
+#define GRAVITY 0, 10
 
 Arduino_H7_Video display(SCREEN_WIDTH, SCREEN_HEIGHT, GigaDisplayShield);
 
 Particle flakes[FLAKE_COUNT];
-Vector2D gravity(0, 1);
+Vector2D gravity(GRAVITY);
 
 void resetFlake(Particle &flake)
 {
   flake.vel *= 0;
   flake.diameter = random(MIN_DIAMETER, MAX_DIAMETER);
   flake.color = 0x0f0f0f * 16 * ((float)flake.diameter / MAX_DIAMETER);
-  flake.pos.set(random(SCREEN_WIDTH), 0);
+  flake.pos.set(random(SCREEN_WIDTH), -2 * flake.diameter);
 }
 
 void pPreUpdate(Particle &flake)
 {
-  flake.applyForce(gravity);
+  flake.applyForce(gravity / flake.diameter);
 }
 
 void pPostUpdate(Particle &flake)

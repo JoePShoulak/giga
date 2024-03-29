@@ -4,6 +4,7 @@ PORT = COM3
 BAUDRATE = 9600
 
 .PHONY: all install compile upload monitor
+.PHONY: a i c u m
 
 all: compile upload monitor
 
@@ -19,3 +20,9 @@ upload:
 
 monitor:
 	arduino-cli monitor -p $(PORT) --config baudrate=$(BAUDRATE)
+
+a: all
+i: install
+c: compile
+u: upload
+m: monitor
