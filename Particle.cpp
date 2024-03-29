@@ -3,7 +3,7 @@
 #define GRAVITY 0, 10
 Vector2D gravity(GRAVITY);
 
-Particle::Particle(int x, int y, int diameter, int color) : pos(x, y), diameter(diameter), color(color)
+Particle::Particle(Arduino_H7_Video &gfx, int x, int y, int diameter, int color) : pos(x, y), diameter(diameter), color(color), gfx(gfx)
 {
 }
 
@@ -23,6 +23,10 @@ void Particle::update()
   vel += acc;
   pos += vel;
   acc *= 0;
+
+  gfx.fill(color);
+  gfx.noStroke();
+  gfx.circle(pos.x, pos.y, diameter);
 }
 
 void Particle::update(void (*postUpdate)(Particle &))

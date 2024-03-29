@@ -11,7 +11,7 @@
 #define MIN_DIAMETER 10
 #define MAX_DIAMETER 80
 
-Arduino_H7_Video display(SCREEN_WIDTH, SCREEN_HEIGHT, GigaDisplayShield);
+Arduino_H7_Video gfx(SCREEN_WIDTH, SCREEN_HEIGHT, GigaDisplayShield);
 Particle flakes[FLAKE_COUNT];
 
 void resetFlake(Particle &flake)
@@ -24,19 +24,13 @@ void resetFlake(Particle &flake)
 
 void pPostUpdate(Particle &flake)
 {
-  // check bounds
   if (flake.pos.y > SCREEN_HEIGHT)
     resetFlake(flake);
-
-  // draw
-  display.fill(flake.color);
-  display.noStroke();
-  display.circle(flake.pos.x, flake.pos.y, flake.diameter);
 }
 
 void setup()
 {
-  while (display.begin() == 1)
+  while (gfx.begin() == 1)
     ;
 
   Serial.begin(BAUDRATE);
@@ -44,22 +38,25 @@ void setup()
   //   ;
 
   for (Particle &flake : flakes)
+  {
+    flake.gfx = gfx;
     resetFlake(flake);
+  }
 
-  display.beginDraw();
-  display.clear();
-  display.endDraw();
+  gfx.beginDraw();
+  gfx.clear();
+  gfx.endDraw();
 }
 
 void loop()
 {
-  display.beginDraw();
-  display.clear();
+  gfx.beginDraw();
+  gfx.clear();
 
   for (Particle &flake : flakes)
     flake.update(pPostUpdate);
 
-  display.endDraw();
+  gfx.endDraw();
 
   delay(FRAME_DELAY);
 }
