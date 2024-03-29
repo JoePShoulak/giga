@@ -15,6 +15,7 @@ unsigned long prevFrameTime;
 void setup()
 {
   gfx.begin();
+  gfx.noStroke();
   gfx.beginDraw();
   gfx.clear();
   gfx.endDraw();

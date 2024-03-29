@@ -13,12 +13,10 @@ public:
   void begin(Arduino_H7_Video &gfx);
   void update();
   void reset();
-
   void applyForce(Vector2D force);
-  bool onScreen();
 
+  bool onScreen();
   void draw();
-  void print();
 
   Vector2D pos;
   Vector2D vel;
