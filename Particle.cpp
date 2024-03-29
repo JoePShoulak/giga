@@ -1,6 +1,9 @@
 #include "Particle.h"
 
 #define GRAVITY 0, 10
+#define MIN_DIAMETER 10
+#define MAX_DIAMETER 80
+
 Vector2D gravity(GRAVITY);
 
 Particle::Particle(Arduino_H7_Video &gfx, int x, int y, int diameter, int color) : pos(x, y), diameter(diameter), color(color), gfx(gfx)
@@ -24,16 +27,20 @@ void Particle::update()
   pos += vel;
   acc *= 0;
 
+  if (pos.y > gfx.height())
+    this->reset();
+
   gfx.fill(color);
   gfx.noStroke();
   gfx.circle(pos.x, pos.y, diameter);
 }
 
-void Particle::update(void (*postUpdate)(Particle &))
+void Particle::reset()
 {
-  this->update();
-
-  postUpdate(*this);
+  vel *= 0;
+  diameter = random(MIN_DIAMETER, MAX_DIAMETER);
+  color = 0x0f0f0f * 16 * ((float)diameter / MAX_DIAMETER);
+  pos.set(random(gfx.width()), -2 * diameter);
 }
 
 void Particle::print()

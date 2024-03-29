@@ -12,8 +12,8 @@ public:
 
   void applyForce(Vector2D force);
   void update();
-  void update(void (*postUpdate)(Particle &));
 
+  void reset();
   void print();
 
   Vector2D pos;
