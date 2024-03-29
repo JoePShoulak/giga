@@ -7,6 +7,7 @@ class Vector2D
 {
 public:
   Vector2D(double x, double y);
+  Vector2D();
 
   double x;
   double y;
@@ -19,9 +20,7 @@ public:
   Vector2D &mult(double scalar);
   Vector2D &div(double scalar);
 
-  Vector2D &set(double a);
   Vector2D &set(double a, double b);
-  Vector2D &zero();
 
   Vector2D &add(const Vector2D &vec);
   Vector2D &sub(const Vector2D &vec);

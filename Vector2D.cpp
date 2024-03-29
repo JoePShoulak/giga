@@ -4,6 +4,12 @@ Vector2D::Vector2D(double x, double y) : x(x), y(y)
 {
 }
 
+Vector2D::Vector2D()
+{
+  x = 0;
+  y = 0;
+}
+
 double Vector2D::magSq()
 {
   return pow(x, 2) + pow(y, 2);
@@ -46,18 +52,6 @@ Vector2D &Vector2D::set(double a, double b)
 {
   x = a;
   y = b;
-  return *this;
-}
-
-Vector2D &Vector2D::set(double a)
-{
-  this->set(a, a);
-  return *this;
-}
-
-Vector2D &Vector2D::zero()
-{
-  this->set(0);
   return *this;
 }
 

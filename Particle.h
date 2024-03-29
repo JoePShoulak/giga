@@ -6,9 +6,19 @@
 class Particle
 {
 public:
-  Particle(int x, int y);
+  Particle(int x, int y, int diameter, int color);
 
-private:
+  void applyForce(Vector2D force);
+  void update();
+  void update(void (*postUpdate)(Particle &));
+  void update(void (*preUpdate)(Particle &), void (*postUpdate)(Particle &));
+
+  Vector2D pos;
+  Vector2D vel;
+  Vector2D acc;
+
+  int diameter;
+  int color;
 };
 
 #endif
