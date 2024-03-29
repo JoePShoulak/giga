@@ -10,10 +10,14 @@ public:
   Particle(Arduino_H7_Video &gfx, int x, int y, int diameter, int color);
   Particle();
 
-  void applyForce(Vector2D force);
+  void begin(Arduino_H7_Video &gfx);
   void update();
-
   void reset();
+
+  void applyForce(Vector2D force);
+  bool onScreen();
+
+  void draw();
   void print();
 
   Vector2D pos;
@@ -24,6 +28,9 @@ public:
   int color;
 
   Arduino_H7_Video gfx;
+
+private:
+  bool _beenOnScreen;
 };
 
 #endif

@@ -22,10 +22,7 @@ void setup()
   //   ;
 
   for (Particle &flake : flakes)
-  {
-    flake.gfx = gfx;
-    flake.reset();
-  }
+    flake.begin(gfx);
 
   gfx.beginDraw();
   gfx.clear();

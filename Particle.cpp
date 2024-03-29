@@ -10,13 +10,14 @@ Particle::Particle(Arduino_H7_Video &gfx, int x, int y, int diameter, int color)
 {
 }
 
-Particle::Particle()
+Particle::Particle() // TODO: Ask Zach for help
 {
 }
 
-void Particle::applyForce(Vector2D force)
+void Particle::begin(Arduino_H7_Video &gfx)
 {
-  acc += force;
+  this->gfx = gfx;
+  this->reset();
 }
 
 void Particle::update()
@@ -27,20 +28,44 @@ void Particle::update()
   pos += vel;
   acc *= 0;
 
-  if (pos.y > gfx.height())
-    this->reset();
+  if (this->onScreen())
+  {
+    _beenOnScreen = true;
+    this->draw();
+    return;
+  }
 
-  gfx.fill(color);
-  gfx.noStroke();
-  gfx.circle(pos.x, pos.y, diameter);
+  if (_beenOnScreen)
+    this->reset();
 }
 
 void Particle::reset()
 {
   vel *= 0;
+  _beenOnScreen = false;
   diameter = random(MIN_DIAMETER, MAX_DIAMETER);
   color = 0x0f0f0f * 16 * ((float)diameter / MAX_DIAMETER);
   pos.set(random(gfx.width()), -2 * diameter);
+}
+
+void Particle::applyForce(Vector2D force)
+{
+  acc += force;
+}
+
+bool Particle::onScreen()
+{
+  return pos.x < gfx.width() + diameter / 2 &&
+         pos.y < gfx.height() + diameter / 2 &&
+         pos.x > -diameter / 2 &&
+         pos.y > -diameter / 2;
+}
+
+void Particle::draw()
+{
+  gfx.fill(color);
+  gfx.noStroke();
+  gfx.circle(pos.x, pos.y, diameter);
 }
 
 void Particle::print()
