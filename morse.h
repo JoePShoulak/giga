@@ -3,7 +3,6 @@
 
 #include <ArduinoGraphics.h>
 #include <Arduino_H7_Video.h>
-
 #include "colors.h"
 
 #ifndef SCREEN_WIDTH
@@ -34,7 +33,7 @@ void space(Arduino_H7_Video &display)
   update(display);
 }
 
-void dit(Arduino_H7_Video &display)
+void dot(Arduino_H7_Video &display)
 {
   int x = xCurr * MORSE_SIZE + MORSE_SIZE * 0.5;
   int y = yCurr * MORSE_SIZE + MORSE_SIZE * 0.5;
@@ -57,19 +56,22 @@ void dash(Arduino_H7_Video &display)
   update(display);
 }
 
-void sos(Arduino_H7_Video &display)
+void drawMorseString(Arduino_H7_Video &display, String morseString)
 {
-  dit(display);
-  dit(display);
-  dit(display);
+  for (int i = 0; i < morseString.length(); i++)
+  {
+    char c = morseString[i];
+
+    if (c == '.')
+      dot(display);
+    else if (c == '-')
+      dash(display);
+    else if (c == ' ')
+      space(display);
+  }
+
   space(display);
-  dash(display);
-  dash(display);
-  dash(display);
   space(display);
-  dit(display);
-  dit(display);
-  dit(display);
 }
 
 void morseDemo(Arduino_H7_Video &display)
@@ -90,10 +92,7 @@ void morseDemo(Arduino_H7_Video &display)
   display.noStroke();
   display.fill(BLUE);
 
-  sos(display);
-  space(display);
-  space(display);
-  sos(display);
+  drawMorseString(display, "... --- ...");
 
   display.endDraw();
 }
