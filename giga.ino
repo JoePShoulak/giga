@@ -1,36 +1,33 @@
 #include <ArduinoGraphics.h>
 #include <Arduino_H7_Video.h>
 #include "Particle.h"
-#include "colors.h"
 
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 480
-#define BAUDRATE 9600
-#define FRAME_DELAY 40
+#define FRAME_DURATION 40
 #define FLAKE_COUNT 10
 
 Arduino_H7_Video gfx(SCREEN_WIDTH, SCREEN_HEIGHT, GigaDisplayShield);
+
 Particle flakes[FLAKE_COUNT];
+unsigned long prevFrameTime;
 
 void setup()
 {
-  while (gfx.begin() == 1)
-    ;
-
-  Serial.begin(BAUDRATE);
-  // while (!Serial)
-  //   ;
-
-  for (Particle &flake : flakes)
-    flake.begin(gfx);
-
+  gfx.begin();
   gfx.beginDraw();
   gfx.clear();
   gfx.endDraw();
+
+  for (Particle &flake : flakes)
+    flake.begin(gfx);
 }
 
 void loop()
 {
+  if (millis() < prevFrameTime + FRAME_DURATION)
+    return;
+
   gfx.beginDraw();
   gfx.clear();
 
@@ -39,5 +36,5 @@ void loop()
 
   gfx.endDraw();
 
-  delay(FRAME_DELAY);
+  prevFrameTime = millis();
 }
