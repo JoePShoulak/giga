@@ -6,7 +6,8 @@
 
 Vector2D gravity(GRAVITY);
 
-Particle::Particle(Arduino_H7_Video &gfx, int x, int y, int diameter, int color) : pos(x, y), diameter(diameter), color(color), gfx(gfx)
+Particle::Particle(Arduino_H7_Video &gfx, int x, int y, int diameter, int color)
+    : gfx(gfx), pos(x, y), diameter(diameter), color(color)
 {
 }
 
